@@ -21,7 +21,7 @@ namespace MyLibrary
 
         public List<User> Users = new List<User>()
         {
-            new User(0, "Дмитрий", "Кризо",
+            new User(0, "Дмитрий", "Кризо", 
                 new List<Book>()
                 {
                 new Book(3431, "Александр Пушкин", "Евгений Онегин", 1921, 7),

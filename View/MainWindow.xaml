@@ -98,7 +98,7 @@
             </Label>
                 <TextBox FontSize="12" Name="UserBookAgeSearch"/>
                 <Button Content="Найти книги у пользователя" Name="FindUserBooks_Button" Click="FindUserBooks_Button_Click"/>
-            </StackPanel>
+        </StackPanel>
         </Expander>
 
         <Expander Grid.Column="2" Header="Поиск среди всех книг" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom">
@@ -120,7 +120,7 @@
             </Label>
                 <TextBox FontSize="12" Name="BookAgeSearch"/>
                 <Button FontSize="12px" Content="Найти книгу" Name="FindBook_Button" Click="FindBook_Button_Click"/>
-                <Button Content="Добавить книгу пользователю"  FontSize="14px" Click="AddBookButton_Click"/>
+            <Button Content="Добавить книгу пользователю"  FontSize="14px" Click="AddBookButton_Click"/>
         </StackPanel>
         </Expander>
     </Grid>

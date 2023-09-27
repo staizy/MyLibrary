@@ -16,7 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
@@ -60,6 +60,9 @@
                 </GridView>
             </ListView.View>
         </ListView>
+
+        <Button Content="Добавить книгу пользователю" Grid.Column="2" Grid.Row="2"
+                FontSize="14px" Click="AddBookButton_Click"/>
 
         <Expander Header="Поиск пользователя" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="3" VerticalAlignment="Bottom">
             <StackPanel Grid.Row="3">
@@ -120,7 +123,7 @@
             </Label>
                 <TextBox FontSize="12" Name="BookAgeSearch"/>
                 <Button FontSize="12px" Content="Найти книгу" Name="FindBook_Button" Click="FindBook_Button_Click"/>
-            <Button Content="Добавить книгу пользователю"  FontSize="14px" Click="AddBookButton_Click"/>
+            
         </StackPanel>
         </Expander>
     </Grid>

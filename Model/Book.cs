@@ -3,24 +3,77 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Collections.ObjectModel;
 
 namespace MyLibrary.Model
 {
-    public class Book
+    public class Book : INotifyPropertyChanged
     {
-        public Book(short article, string author, string name, int age, int count)
+        private short article;
+        private string author;
+        private string name;
+        private int age;
+        private int count;
+
+        public short Article
         {
-            Article = article;
-            Author = author;
-            Name = name;
-            Age = age;
-            Count = count;
+            get { return article; }
+            set
+            {
+                article = value;
+                OnPropertyChanged("Article");
+            }
         }
 
-        public short Article { get; set; }
-        public string Author { get; set; }
-        public string Name { get; set; }
-        public int Age { get; set; }
-        public int Count { get; set; }
+        public string Author
+        {
+            get { return author; }
+            set
+            {
+                author = value;
+                OnPropertyChanged("Author");
+            }
+        }
+
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                OnPropertyChanged("Name");
+            }
+        }
+
+        public int Age
+        {
+            get { return age; }
+            set
+            {
+                age = value;
+                OnPropertyChanged("Age");
+            }
+        }
+
+        public int Count
+        {
+            get { return count; }
+            set
+            {
+                count = value;
+                OnPropertyChanged("Count");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
     }
 }

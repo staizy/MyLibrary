@@ -21,32 +21,32 @@ namespace MyLibrary
 
         public List<User> Users = new List<User>()
         {
-            new User(0, "Дмитрий", "Кризо", 
+            new User(0, "Дмитрий", "Кризо",
                 new List<Book>()
                 {
                 new Book(3431, "Александр Пушкин", "Евгений Онегин", 1921, 7),
                 new Book(9352, "Николай Гоголь", "Мастер и Маргарита", 1913, 11),
                 }
                 ),
-            new User(1, "Саня", "Ржавый",
+            new User(1, "Леха", "Ржавый",
                 new List<Book>()
                 {
                 new Book(3431, "Александр Пушкин", "Евгений Онегин", 1921, 7)
                 }
                 ),
-            new User(2, "Лёха", "Белый", new List<Book>()),
+            new User(2, "Саша", "Белый", new List<Book>()),
             new User(3, "Володя", "Черный", new List<Book>()),
             new User(4, "Андрей", "Чикатило", new List<Book>()
             {
                 new Book(1044, "Андрей Писатель", "Добрый Вечер", 2023, 3),
-            new Book(5699, "Маргарет Этвуд", "Рассказ служанки", 1985, 9),
-            new Book(9021, "Джордж Оруэлл", "1984", 1949, 10),
-            new Book(3457, "Эрих Мария Ремарк", "Три товарища", 1936, 8),
-            new Book(7890, "Федор Достоевский", "Преступление и наказание", 1866, 12),
-            new Book(5678, "Маргарет Этвуд", "Основание", 2020, 8),
-            new Book(9022, "Джордж Оруэлл", "Скотный двор", 1945, 9),
-            new Book(3450, "Эрих Мария Ремарк", "Триумфальная арка", 1945, 7),
-            new Book(7891, "Федор Достоевский", "Идиот", 1869, 11)
+                new Book(5699, "Маргарет Этвуд", "Рассказ служанки", 1985, 9),
+                new Book(9021, "Джордж Оруэлл", "1984", 1949, 10),
+                new Book(3457, "Эрих Мария Ремарк", "Три товарища", 1936, 8),
+                new Book(7890, "Федор Достоевский", "Преступление и наказание", 1866, 12),
+                new Book(5678, "Маргарет Этвуд", "Основание", 2020, 8),
+                new Book(9022, "Джордж Оруэлл", "Скотный двор", 1945, 9),
+                new Book(3450, "Эрих Мария Ремарк", "Триумфальная арка", 1945, 7),
+                new Book(7891, "Федор Достоевский", "Идиот", 1869, 11)
             }),
             new User(5, "Кирилл", "Ллирик", new List<Book>()),
             new User(6, "Юрий", "Дудь", new List<Book>()
@@ -166,13 +166,36 @@ namespace MyLibrary
         private void FindBook_Button_Click(object sender, RoutedEventArgs e)
         {
             var allbooks = from u in Books
-                            where ((Convert.ToString(u.Article).Contains(BookArticleSearch.Text)) || string.IsNullOrEmpty(BookArticleSearch.Text)) &&
-                                  ((u.Author.Contains(BookAuthorSearch.Text)) || string.IsNullOrEmpty(BookAuthorSearch.Text)) &&
-                                  ((u.Name.Contains(BookNameSearch.Text)) || string.IsNullOrEmpty(BookNameSearch.Text)) &&
-                                  ((Convert.ToString(u.Age) == BookAgeSearch.Text) || string.IsNullOrEmpty(BookAgeSearch.Text))
-                            select u;
+                           where ((Convert.ToString(u.Article).Contains(BookArticleSearch.Text)) || string.IsNullOrEmpty(BookArticleSearch.Text)) &&
+                                 ((u.Author.Contains(BookAuthorSearch.Text)) || string.IsNullOrEmpty(BookAuthorSearch.Text)) &&
+                                 ((u.Name.Contains(BookNameSearch.Text)) || string.IsNullOrEmpty(BookNameSearch.Text)) &&
+                                 ((Convert.ToString(u.Age) == BookAgeSearch.Text) || string.IsNullOrEmpty(BookAgeSearch.Text))
+                           select u;
             AllBooksList.ItemsSource = allbooks;
             AllBooksList.Items.Refresh();
+        }
+
+        private void ReturnBook_Button_Click(object sender, RoutedEventArgs e)
+        {
+            User CurrentUser = UserNameList.SelectedItem as User;
+            Book CurrentUserBook = UserBooksList.SelectedItem as Book;
+            List<Book> books = CurrentUser.BookList;
+            List<Book> allBooks = Books;
+            if (CurrentUserBook == null) MessageBox.Show("Выберите книгу!");
+            if (CurrentUser == null) MessageBox.Show("Выберите пользователя!");
+            if (CurrentUser != null && CurrentUserBook != null)
+            {
+                int newbookindex = UserBooksList.Items.IndexOf(CurrentUserBook);
+
+                foreach (var i in allBooks)
+                        if (CurrentUserBook.Article == i.Article)
+                            i.Count++;
+
+                books.RemoveAt(newbookindex);
+                UserBooksList.ItemsSource = books;
+                UserBooksList.Items.Refresh();
+                AllBooksList.Items.Refresh();
+            }
         }
     }
 }

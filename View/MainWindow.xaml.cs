@@ -105,8 +105,8 @@ namespace MyLibrary
         {
             User CurrentUser = UserNameList.SelectedItem as User;
             Book CurrentBook = AllBooksList.SelectedItem as Book;
-            if (CurrentBook == null) MessageBox.Show("Выберите книгу!");
-            if (CurrentUser == null) MessageBox.Show("Выберите пользователя!");
+            if (CurrentBook == null) MessageBox.Show("Выберите книгу!", "Внимание!");
+            if (CurrentUser == null) MessageBox.Show("Выберите пользователя!", "Внимание!");
             if (CurrentUser != null && CurrentBook != null)
             {
                 if (CurrentBook.Count > 0)
@@ -116,7 +116,7 @@ namespace MyLibrary
                 }
                 else
                 {
-                    MessageBox.Show("Эта книга закончилась на складе!");
+                    MessageBox.Show("Эта книга закончилась на складе!", "Внимание!");
                 }
                 var books = new List<Book>();
                 if (CurrentUser != null)
@@ -179,12 +179,12 @@ namespace MyLibrary
         {
             User CurrentUser = UserNameList.SelectedItem as User;
             Book CurrentUserBook = UserBooksList.SelectedItem as Book;
-            List<Book> books = CurrentUser.BookList;
             List<Book> allBooks = Books;
-            if (CurrentUserBook == null) MessageBox.Show("Выберите книгу!");
-            if (CurrentUser == null) MessageBox.Show("Выберите пользователя!");
+            if (CurrentUserBook == null) MessageBox.Show("Выберите книгу!", "Внимание!");
+            if (CurrentUser == null) MessageBox.Show("Выберите пользователя!", "Внимание!");
             if (CurrentUser != null && CurrentUserBook != null)
             {
+                List<Book> books = CurrentUser.BookList;
                 int newbookindex = UserBooksList.Items.IndexOf(CurrentUserBook);
 
                 foreach (var i in allBooks)

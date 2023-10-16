@@ -46,7 +46,7 @@ namespace MyLibrary.ViewModel
             set
             {
                 selectedUserBook = value;
-                OnPropertyChanged("SelectedUserBook");
+                OnPropertyChanged(nameof(SelectedUserBook));
             }
         }
 
@@ -91,15 +91,14 @@ namespace MyLibrary.ViewModel
                       {
                           MessageBox.Show("Не выбран пользователь в меню слева, у которого Вы собираетесь удалить выбранную книгу!", "Внимание!");
                       }
-/*                      if (selectedUserBook == null)
+                      if (selectedUserBook == null)
                       {
                           MessageBox.Show("Не выбрана книга в меню посередине, которую Вы собираетесь удалить у выбранного пользователя!", "Внимание!");
-                      }*/
+                      }
                       else
                       {
-                            selectedUser.UserBooks.Remove(selectedUserBook);
-                            selectedUserBook.Count++;
-                      }
+                          selectedUserBook.Count++;
+                          selectedUser.UserBooks.Remove(selectedUserBook);
                   }));
             }
         }

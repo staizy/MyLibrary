@@ -48,7 +48,7 @@ namespace MyLibrary.ViewModel
             set
             {
                 selectedUserBook = value;
-                OnPropertyChanged("SelectedUserBook");
+                OnPropertyChanged(nameof(SelectedUserBook));
             }
         }
 

@@ -20,6 +20,7 @@ namespace MyLibrary.ViewModel
         public ObservableCollection<User> Users { get; set; }
         public ObservableCollection<Book> Books { get; set; }
 
+
         public User SelectedUser
         {
             get { return selectedUser; }
@@ -27,6 +28,7 @@ namespace MyLibrary.ViewModel
             {
                 selectedUser = value;
                 OnPropertyChanged("SelectedUser");
+                OnPropertyChanged("FilteredUserBooks");
             }
         }
 
@@ -91,16 +93,104 @@ namespace MyLibrary.ViewModel
                       {
                           MessageBox.Show("Не выбран пользователь в меню слева, у которого Вы собираетесь удалить выбранную книгу!", "Внимание!");
                       }
-/*                      if (selectedUserBook == null)
+                      if (selectedUserBook == null)
                       {
                           MessageBox.Show("Не выбрана книга в меню посередине, которую Вы собираетесь удалить у выбранного пользователя!", "Внимание!");
-                      }*/
+                      }
                       else
                       {
-                            selectedUser.UserBooks.Remove(selectedUserBook);
-                            selectedUserBook.Count++;
+                          selectedUserBook.Count++;
+                          selectedUser.UserBooks.Remove(selectedUserBook);
                       }
                   }));
+            }
+        }
+
+        public ObservableCollection<Book> FilteredBooks
+        {
+            get
+            {
+                if (searchBookText != null)
+                {
+                    return new ObservableCollection<Book>(Books.Where(x => x.Name.Contains(SearchBookText, StringComparison.OrdinalIgnoreCase) || 
+                    x.Author.Contains(SearchBookText, StringComparison.OrdinalIgnoreCase) || Convert.ToString(x.Article).Contains(SearchBookText) ||
+                    Convert.ToString(x.Age).Contains(SearchBookText)));
+                }
+                else
+                {
+                    return Books;
+                }
+            }
+        }
+
+        private string searchBookText;
+        public string SearchBookText
+        {
+            get { return searchBookText; }
+            set
+            {
+                searchBookText = value;
+                OnPropertyChanged("SearchBookText");
+                OnPropertyChanged("FilteredBooks");
+            }
+        }
+
+        public ObservableCollection<Book> FilteredUserBooks
+        {
+            get
+            {
+                if (searchUserBookText != null && selectedUser != null)
+                {
+                    return new ObservableCollection<Book>(SelectedUser.UserBooks.Where(x => x.Name.Contains(SearchUserBookText, StringComparison.OrdinalIgnoreCase) ||
+                    x.Author.Contains(SearchUserBookText, StringComparison.OrdinalIgnoreCase)
+                    || Convert.ToString(x.Article).Contains(SearchUserBookText) || Convert.ToString(x.Age).Contains(SearchUserBookText)));
+                }
+
+                if (selectedUser != null)
+                {
+                    return SelectedUser.UserBooks;
+                }
+                else return new ObservableCollection<Book>();
+            }
+        }
+
+        private string searchUserBookText;
+        public string SearchUserBookText
+        {
+            get { return searchUserBookText; }
+            set
+            {
+                searchUserBookText = value;
+                OnPropertyChanged("SearchUserBookText");
+                OnPropertyChanged("FilteredUserBooks");
+            }
+        }
+
+        public ObservableCollection<User> FilteredUsers
+        {
+            get
+            {
+                if (searchUserText != null)
+                {
+                    return new ObservableCollection<User>(Users.Where(x => x.Name.Contains(SearchUserText, StringComparison.OrdinalIgnoreCase) ||
+                    x.Surname.Contains(SearchUserText, StringComparison.OrdinalIgnoreCase) || Convert.ToString(x.Id).Contains(SearchUserText)));
+                }
+                else
+                {
+                    return Users;
+                }
+            }
+        }
+
+        private string searchUserText;
+        public string SearchUserText
+        {
+            get { return searchUserText; }
+            set
+            {
+                searchUserText = value;
+                OnPropertyChanged("SearchUserText");
+                OnPropertyChanged("FilteredUsers");
             }
         }
 

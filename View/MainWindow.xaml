@@ -36,7 +36,7 @@
         </Label>
 
         <ListView Background="LightGray" Name="UserNameList" Grid.Column="0" Grid.Row="1"
-                  ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}">
+                  ItemsSource="{Binding FilteredUsers}" SelectedItem="{Binding SelectedUser}">
             <ListView.View>
             <GridView AllowsColumnReorder="False">
                     <GridViewColumn Header="ID" Width="30" DisplayMemberBinding="{Binding Id, UpdateSourceTrigger=PropertyChanged}"/>
@@ -46,7 +46,7 @@
             </ListView.View>
         </ListView>
         <ListView Name="UserBooksList" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"
-                  DataContext="{Binding SelectedUser}" ItemsSource="{Binding UserBooks}" SelectedItem="{Binding SelectedUserBook}">
+                  ItemsSource="{Binding FilteredUserBooks}" SelectedItem="{Binding SelectedUserBook}">
             <ListView.View>
                 <GridView AllowsColumnReorder="False">
                     <GridViewColumn Header="Артикль" Width="50" DisplayMemberBinding="{Binding Article, UpdateSourceTrigger=PropertyChanged}"/>
@@ -57,7 +57,7 @@
             </ListView.View>
         </ListView>
         <ListView Background="LightGray" Name="AllBooksList" Grid.Column="3" Grid.Row="1"
-                  ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}">
+                  SelectedItem="{Binding SelectedBook}" ItemsSource="{Binding FilteredBooks}">
             <ListView.View>
                 <GridView AllowsColumnReorder="False">
                     <GridViewColumn Header="Артикль" Width="50" DisplayMemberBinding="{Binding Article, UpdateSourceTrigger=PropertyChanged}"/>
@@ -78,65 +78,30 @@
 
         <Expander Header="Поиск пользователя" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="3" VerticalAlignment="Bottom">
             <StackPanel Grid.Row="3">
-            <Label HorizontalAlignment="Center">
-                Поиск пользователя по ID
-            </Label>
-            <TextBox Name="IdSearch" FontSize="12"/>
-            <Label HorizontalAlignment="Center">
-                Поиск пользователя по имени
-            </Label>
-            <TextBox Name="NameSearch" FontSize="12"/>
-            <Label HorizontalAlignment="Center">
-                Поиск пользователя по фамилии
-            </Label>
-            <TextBox Name="SurnameSearch" FontSize="12"/>
-                <!-- <Button Margin="10" Content="Найти пользователя" Name="FindUser_Button" Click="FindUser_Click"/>!-->
+                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Padding="5px">
+                Поиск пользователя по ID, имени, фамилии
+                </TextBlock>
+                <TextBox Name="IdSearch" Margin="10px" FontSize="12" Text="{Binding SearchUserText, UpdateSourceTrigger=PropertyChanged}"/>
+            
             </StackPanel>
         </Expander>
 
         <Expander Header="Поиск среди книг пользователя" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom">
             <StackPanel Grid.Row="3" Grid.Column="1">
-            <Label HorizontalAlignment="Center">
-                Поиск среди книг пользователя по артиклю
-            </Label>
-                <TextBox FontSize="12" Name="UserBookArticleSearch"/>
-            <Label HorizontalAlignment="Center">
-                Поиск среди книг пользователя по автору
-            </Label>
-                <TextBox FontSize="12" Name="UserBookAuthorSearch"/>
-            <Label HorizontalAlignment="Center">
-                Поиск среди книг пользователя по названию
-            </Label>
-                <TextBox FontSize="12" Name="UserBookNameSearch"/>
-            <Label HorizontalAlignment="Center">
-                Поиск среди книг пользователя по году написания
-            </Label>
-                <TextBox FontSize="12" Name="UserBookAgeSearch"/>
-                <Button Margin="10" Content="Найти книги у пользователя" Name="FindUserBooks_Button" />
-        </StackPanel>
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Padding="5px">
+                Поиск среди книг пользователя по артиклю, названию, автору
+            </TextBlock>
+                <TextBox FontSize="12" Margin="10px" Name="UserBookArticleSearch" Text="{Binding SearchUserBookText, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
         </Expander>
 
         <Expander Grid.Column="3" Header="Поиск среди всех книг" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom">
         <StackPanel Grid.Row="3" Grid.Column="2">
-            <Label HorizontalAlignment="Center">
-                Поиск среди всех книг по артиклю
-            </Label>
-            <TextBox FontSize="12" Name="BookArticleSearch"/>
-            <Label HorizontalAlignment="Center">
-                Поиск среди всех книг  по автору
-            </Label>
-                <TextBox FontSize="12" Name="BookAuthorSearch"/>
-            <Label HorizontalAlignment="Center">
-                Поиск среди всех книг по названию
-            </Label>
-                <TextBox FontSize="12" Name="BookNameSearch"/>
-            <Label HorizontalAlignment="Center">
-                Поиск среди всех книг по году написания
-            </Label>
-                <TextBox FontSize="12" Name="BookAgeSearch"/>
-                <Button Margin="10" FontSize="12px" Content="Найти книгу" Name="FindBook_Button" />
-            
-        </StackPanel>
+                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Padding="5px">
+                Поиск среди всех книг по артиклю, названию, автору
+            </TextBlock>
+                <TextBox FontSize="12" Margin="10px" Name="BookArticleSearch" Text="{Binding SearchBookText, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
         </Expander>
     </Grid>
 </Window>
